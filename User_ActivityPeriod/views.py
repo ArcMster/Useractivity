@@ -106,14 +106,14 @@ def fetchall(request):
     json_data = {"ok": True,
         "members":[]}
     j = json.dumps(json_data)
-    with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','w') as f:
+    with open('/home/pssreenath/Useractivity/user.json','w') as f:
         f.write(j)
         f.close()
     
 
     for i in allusers:
         
-        with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','r') as f:
+        with open('/home/pssreenath/Useractivity/user.json','r') as f:
             k = json.load(f)
             f.close()
         memberdata['id']=i.uid
@@ -127,7 +127,7 @@ def fetchall(request):
         memberdata['activity_periods'][2]['end_time']=i.end_time3
         k['members'].append(memberdata)
         k = json.dumps(k)
-        with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','w') as f:
+        with open('/home/pssreenath/Useractivity/user.json','w') as f:
             f.write(k)
             f.close()
         memberdata = members_sample
