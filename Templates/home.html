@@ -1,5 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<font color = 'white'>
+<body>
 <h1>
-    Welcome to user database !!!!
+    Enter the details to enroll employee in the database
 
 </h1>
 
@@ -15,20 +20,66 @@
         <br>
         <br>
         Day 1
-        <input type = "datetime" value="Start time" name="stime1">
-        <input type = "datetime" value="End time" name="etime1">
         <br>
-        Day 2
-        <input type = "datetime" value="Start time" name="stime2">
-        <input type = "datetime" value="End time" name="etime2">
+        Start time 
         <br>
-        Day 3
-        <input type = "datetime" value="Start time" name="stime3">
-        <input type = "datetime" value="End time" name="etime3">
+        <input type="text" value = "Month" name="stime1m">
+        <input type = "text" value="Day" name="stime1d">
+        <input type = "text" value="Year" name="stime1y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="stime1t">
+        <br>
+        End time
+        <br>
+        <input type="text" value = "Month" name="etime1m">
+        <input type = "text" value="Day" name="etime1d">
+        <input type = "text" value="Year" name="etime1y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="etime1t">
+        <br>
+        Day 2<br>
+        
+        Start time 
+        <br>
+        <input type="text" value = "Month" name="stime2m">
+        <input type = "text" value="Day" name="stime2d">
+        <input type = "text" value="Year" name="stime2y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="stime2t">
+        <br>
+        End time
+        <br>
+        <input type="text" value = "Month" name="etime2m">
+        <input type = "text" value="Day" name="etime2d">
+        <input type = "text" value="Year" name="etime2y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="etime2t">
+        <br>
+        Day 3 <br>
+        Start time 
+        <br>
+        <input type="text" value = "Month" name="stime3m">
+        <input type = "text" value="Day" name="stime3d">
+        <input type = "text" value="Year" name="stime3y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="stime3t">
+        <br>
+        End time
+        <br>
+        <input type="text" value = "Month" name="etime3m">
+        <input type = "text" value="Day" name="etime3d">
+        <input type = "text" value="Year" name="etime3y">
+        Time
+        <input type = "time" value="Time with AM/PM" name="etime3t">
         <br>
         <br>
         <input type="submit" value = "Submit data">
 
 
     </form>
+    <br>
+    <a href="firstpage">go back</a>
 </h2>
+</body>
+</font>
+{% endblock %}

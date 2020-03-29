@@ -1,8 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<font color = 'white'>
+<body>
 <h2>
     <form action="userdata">
-        Enter user id: <input type="text" name="uid">
         <br>
-        <input type="submit">
+        <br>
+        <br>
+        Enter member id: <input type="text" name="uid">
+        <br>
+        <br>
+        <br>
+
+        <input type="submit" value="Fetch member">
     </form>
+
+    <br>
+    Need to fetch all the users ? Click <a href="fetchall">here</a> to fetch and save the details of all users as JSON file
+    <br>
+    <br>
+    click <a href="firstpage">here</a> to go to home page
     
 </h2>
+</body>
+{% endblock %}
+</font>
