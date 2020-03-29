@@ -50,16 +50,14 @@ def data_input(request):
 
 def userdata(request):
     allusers = Userdetails.objects.all()
-    l = []
+    
     
     uid = request.GET['uid']
     for i in allusers:
-        l.append(i.uid)
-        #nid = i.uid
-        #if  nid== uid:
-         #   user = i.real_name
+        if i.uid == uid:
+            name = i.real_name
         
-    return HttpResponse(l)
+    return HttpResponse(name)
 
 def userfetch(request):
     return render(request,'userfetch.html')
