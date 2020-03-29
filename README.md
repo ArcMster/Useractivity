@@ -18,7 +18,9 @@ another page: redirecterror.html will be loaded with an error message, this page
 
 In userfetch.html, if we select the 2nd option i.e., to fetch the details of all the users, data of all the users in the database will be fetched to JSON file named user.json.
 
-Please try using this application and let me know your oppinion.
+For fetching individual users, you can give member id as "1234" for a sample data
+Please try using this application and let me know your opinion.
+
 
 Thanks for reading...!
 
