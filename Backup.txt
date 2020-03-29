@@ -1,0 +1,31 @@
+home.html
+
+<form action = "dates" method = "POST">
+        {% csrf_token %}
+        <input type = "number" value = "Enter the number of months with activity" name = "months">
+        <input type="submit"> <br>
+    </form>
+    <form action="data_input" method="POST">
+        {% csrf_token %}
+        <input type="text" value="Enter Member ID" name="id">
+        <input type="text" value="Full name" name="name">
+        <input type="text" value="Time zone" name="time_zone">
+        <br>
+        {% for i in [0,1] %}
+        <input type="text" value="Activity Start time" name="start_time">
+        <input type="text" value="Activity End time" name="end_time">
+        {% endfor %}
+        <input type="submit" value="Save user details">
+
+
+    </form>
+    
+    ===============
+    views
+
+    def dates(request):
+    a = [0,1]
+    month = request.POST['months']
+    month = int(month)
+    loop_times = "0"*month
+    return render(request,'home.html',{'month':a})
