@@ -8,7 +8,7 @@ import json
 
 #Following is function for displaying the homepage.
 def firstpage(request):
-    return render(request,'Database_portal.html')
+    return render(request,'Database_Portal.html')
 
 #Following is the function for displaying the page from where we can populate the database with a new user's details
 def home(request):
@@ -95,35 +95,48 @@ def userdata(request):
 #Following is the function to fetch all the uses from the database
 def fetchall(request):
     allusers = Userdetails.objects.all()
-    members = {"id":"",
+    
+    memberdata = {"id":"",
             "real_name":"",
             "tz":"",
             "activity_periods":[{"start_time":"","end_time":""},
             {"start_time":"","end_time":""},
             {"start_time":"","end_time":""}]}
-    members_sample = members
+    members_sample = memberdata
     json_data = {"ok": True,
         "members":[]}
-    for i in allusers:
-        members['id']=i.uid
-        members['real_name']=i.real_name
-        members['tz']=i.tz
-        members['activity_periods'][0]['start_time']=i.start_time1
-        members['activity_periods'][0]['end_time']=i.end_time1
-        members['activity_periods'][1]['start_time']=i.start_time2
-        members['activity_periods'][1]['end_time']=i.end_time2
-        members['activity_periods'][2]['start_time']=i.start_time3
-        members['activity_periods'][2]['end_time']=i.end_time3
-        json_data['members'].append(members)
-        members = members_sample
-        print(members_sample)
-    
-    
     j = json.dumps(json_data)
     with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','w') as f:
         f.write(j)
         f.close()
-    return render(request,'home.html')
+    
+
+    for i in allusers:
+        
+        with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','r') as f:
+            k = json.load(f)
+            f.close()
+        memberdata['id']=i.uid
+        memberdata['real_name']=i.real_name
+        memberdata['tz']=i.tz
+        memberdata['activity_periods'][0]['start_time']=i.start_time1
+        memberdata['activity_periods'][0]['end_time']=i.end_time1
+        memberdata['activity_periods'][1]['start_time']=i.start_time2
+        memberdata['activity_periods'][1]['end_time']=i.end_time2
+        memberdata['activity_periods'][2]['start_time']=i.start_time3
+        memberdata['activity_periods'][2]['end_time']=i.end_time3
+        k['members'].append(memberdata)
+        k = json.dumps(k)
+        with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','w') as f:
+            f.write(k)
+            f.close()
+        memberdata = members_sample
+
+    
+    
+   
+    
+    return render(request,'Lastpage.html')
 
 #Following is the function to load the page from where individual users can be fetched.
 def userfetch(request):
