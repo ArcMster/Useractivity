@@ -6,14 +6,20 @@ import json
 
 # Create your views here.
 
+#Following is function for displaying the homepage.
 def firstpage(request):
-    return render(request,'Database_Portal.html')
+    return render(request,'Database_portal.html')
+
+#Following is the function for displaying the page from where we can populate the database with a new user's details
 def home(request):
     return render(request,'home.html')
 
+
+#Following is the function for fetching a user from  the database by member id
 def manualfetch(request):
     return render(request,'userfetch.html')
 
+#Following is the function for formatting the time(to 12hr format) which is taken in 24hr format.
 def time_format(data):
     condition = False
     res = ""
@@ -30,6 +36,8 @@ def time_format(data):
         res += data + " AM"
     return res
 
+
+#Following is the function which takes the data provided by user 
 def data_input(request):
     timesheet = {'Day1':{'Start time':"",'End time': ""},'Day2':{'Start time':"",'End time': ""},'Day3':{'Start time':"",'End time': ""}}
     timesheet['Day1']['Start time']+= (request.POST['stime1m'] +"  " + request.POST['stime1d'] + " " + request.POST['stime1y'] + " " + time_format(request.POST['stime1t']))
@@ -65,7 +73,7 @@ def data_input(request):
     return render(request,'fetch.html')
 
 
-
+#Following is the function to fetch individual users from the database
 def userdata(request):
     allusers = Userdetails.objects.all()
     
@@ -84,6 +92,7 @@ def userdata(request):
     else:
         return render(request,'redirecterror.html')
 
+#Following is the function to fetch all the uses from the database
 def fetchall(request):
     allusers = Userdetails.objects.all()
     members = {"id":"",
@@ -116,5 +125,11 @@ def fetchall(request):
         f.close()
     return render(request,'home.html')
 
+#Following is the function to load the page from where individual users can be fetched.
 def userfetch(request):
     return render(request,'userfetch.html')
+
+#Following is the function to display the page once the database is saved in JSON file.
+
+def lastpage(request):
+    return render(request,'lastpage.html')

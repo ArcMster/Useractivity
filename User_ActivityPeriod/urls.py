@@ -10,5 +10,6 @@ urlpatterns = [
     path('userfetch',views.userfetch,name = 'userfetch'),
     path('userdata',views.userdata,name = 'usedata'),
     path('manualfetch',views.manualfetch,name='manualfetch'),
-    path('fetchall',views.fetchall,name='fetch_all')
+    path('fetchall',views.fetchall,name='fetch_all'),
+    path('lastpage',views.lastpage,name='lastpage'),
 ]
