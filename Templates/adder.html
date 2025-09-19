@@ -1,0 +1,62 @@
+{% load static %}
+
+<link rel='stylesheet' href = "{% static 'bootstrap.css' %}" type = "text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="container-fluid" style="text-align: center; margin-top: 60px">
+    <h1>Depreciation calculator </h1>
+    <h1>
+    <div style = 'text-align: center;'>
+        <input type="number" id = 'capital' placeholder="Capital cost" class="form-control" style = 'width: 52%; margin: 20px; margin-left: 24%;'>
+        <input type = 'number' id = 'age' placeholder="Age of the building" class="form-control" style = 'width: 52%; margin: 20px; margin-left: 24%;'>
+        <input type="number" id="total_age" placeholder="Expected life of building" class="form-control" style = 'width: 52%; margin: 20px; margin-left: 24%;'>
+        <input type="number" id="p_area" placeholder="Plinth area" class="form-control" style = 'width: 52%; margin: 20px; margin-left: 24%;'>
+        <input type = 'button' value="Calculate" onclick="calculator()" class="btn btn-primary">
+    </div>
+    </h1>
+
+
+    <h5 id="sum" style = 'margin-top: 20px;'>
+
+    </h5>
+
+
+
+
+</div>
+
+
+
+<script>
+    function calculator(){
+
+        var capital = parseFloat(document.getElementById('capital').value)
+        var age = parseFloat(document.getElementById('age').value)
+        var total_age = parseFloat(document.getElementById('total_age').value)
+        var p_area = parseFloat(document.getElementById('p_area').value)
+        if (total_age<age+1){
+            var depreciation = (0.94*capital).toFixed(2)
+            var depreciation_text = depreciation + "<br>(taken 94% of Capital cost as residual life of the building is less than one.)"
+        }
+        else{
+            var depreciation = (0.94*capital*age/total_age).toFixed(2)
+            var depreciation_text = depreciation + "<br> (0.94 x capital cost x age/total_age)"
+        }
+
+        var depreciated_amount = (capital - depreciation).toFixed(2)
+        // var cost = (depreciated_amount*1.46).toFixed(2)
+        var cost = (depreciated_amount*1.46).toFixed(2)
+        var total_cost = (cost*p_area).toFixed(2)
+
+
+        document.getElementById('sum').innerHTML = "Depreciation: " + depreciation_text + "<br><br>Depreciated Amount: " + depreciated_amount + "<br> (capital cost - depreciation)" + "<br><br>Cost: " + cost + "<br> (capital cost - depreciation)" + "<br><br>Total Cost: " + total_cost + "<br> (depreciated amount x 1.46 x plinth area)"
+
+    }
+</script>

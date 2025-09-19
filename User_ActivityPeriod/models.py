@@ -13,4 +13,6 @@ class Userdetails(models.Model):
     end_time2 = models.CharField(max_length=15)
     end_time3 = models.CharField(max_length=15)
 
-    
+class Sample(models.Model):
+    name = models.CharField(max_length=7)
+

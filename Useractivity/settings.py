@@ -25,7 +25,7 @@ SECRET_KEY = '1npe25#=u3az%6)f3u**=ax#**2n!we-5ej&jo&_msno4kr((w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pssreenath.pythonanywhere.com']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,17 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'pssreenath$Userdata',
+#         'USER': 'pssreenath',
+#         'PASSWORD': 'Red@1234',
+#         'HOST':'pssreenath.mysql.pythonanywhere-services.com'
+#     }
+# }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -123,3 +135,22 @@ STATICFILES_DIRS=[
 os.path.join(BASE_DIR,'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'nfclub56@gmail.com'
+EMAIL_HOST_PASSWORD = 'hyahuovedvipejon'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+'''
+CRONJOBS = [
+    ('*/1 * * * *','User_ActivityPeriod.cron.hi'),
+]'''
+
+CRONJOBS = [
+    ('*/1 * * * *', 'User_ActivityPeriod.cron.hi','>> /home/pssreenath/Useractivity/assets/j.log')
+]

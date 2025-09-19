@@ -2,13 +2,28 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Userdetails
 import json
-
+from django.core.mail import send_mail
+from .cron import hi
 
 # Create your views here.
 
+def email(request):
+    return render(request,'send.html')
+
+def sendmail(request):
+    message = request.POST['message']
+    send_mail(
+        'this is the subject', #subject
+        'this is the message',
+        'nfclub56@gmail.com', #from email
+        ['psnathsrt@gmail.com','ArcMster@gmail.com'], #to email
+
+    )
+    return HttpResponse(message)
+
 #Following is function for displaying the homepage.
 def firstpage(request):
-    return render(request,'Database_portal.html')
+    return render(request,'Database_Portal.html')
 
 #Following is the function for displaying the page from where we can populate the database with a new user's details
 def home(request):
@@ -37,7 +52,7 @@ def time_format(data):
     return res
 
 
-#Following is the function which takes the data provided by user 
+#Following is the function which takes the data provided by user
 def data_input(request):
     timesheet = {'Day1':{'Start time':"",'End time': ""},'Day2':{'Start time':"",'End time': ""},'Day3':{'Start time':"",'End time': ""}}
     timesheet['Day1']['Start time']+= (request.POST['stime1m'] +"  " + request.POST['stime1d'] + " " + request.POST['stime1y'] + " " + time_format(request.POST['stime1t']))
@@ -50,8 +65,8 @@ def data_input(request):
     uid = request.POST['id']
     name = request.POST['name']
     time_zone = request.POST['time_zone']
-    
-    
+
+
 
     userdata = Userdetails()
     userdata.uid = uid
@@ -64,7 +79,7 @@ def data_input(request):
     userdata.end_time1 = timesheet['Day1']['End time']
     userdata.end_time2 = timesheet['Day2']['End time']
     userdata.end_time3 = timesheet['Day3']['End time']
-    
+
     userdata.save()
     #userdata.activity_periods['start time'].append(start_time)
     #userdata.activity_periods['end time'].append(end_time)
@@ -76,7 +91,7 @@ def data_input(request):
 #Following is the function to fetch individual users from the database
 def userdata(request):
     allusers = Userdetails.objects.all()
-    
+
     fetchall(request)
     condition = False
     uid = request.GET['uid']
@@ -95,35 +110,48 @@ def userdata(request):
 #Following is the function to fetch all the uses from the database
 def fetchall(request):
     allusers = Userdetails.objects.all()
-    members = {"id":"",
+
+    memberdata = {"id":"",
             "real_name":"",
             "tz":"",
             "activity_periods":[{"start_time":"","end_time":""},
             {"start_time":"","end_time":""},
             {"start_time":"","end_time":""}]}
-    members_sample = members
+    members_sample = memberdata
     json_data = {"ok": True,
         "members":[]}
-    for i in allusers:
-        members['id']=i.uid
-        members['real_name']=i.real_name
-        members['tz']=i.tz
-        members['activity_periods'][0]['start_time']=i.start_time1
-        members['activity_periods'][0]['end_time']=i.end_time1
-        members['activity_periods'][1]['start_time']=i.start_time2
-        members['activity_periods'][1]['end_time']=i.end_time2
-        members['activity_periods'][2]['start_time']=i.start_time3
-        members['activity_periods'][2]['end_time']=i.end_time3
-        json_data['members'].append(members)
-        members = members_sample
-        print(members_sample)
-    
-    
     j = json.dumps(json_data)
-    with open('C:\\Users\\PSSRE\\Djangoproject\\Useractivity\\user.json','w') as f:
+    with open('/home/pssreenath/Useractivity/user.json','w') as f:
         f.write(j)
         f.close()
-    return render(request,'home.html')
+
+
+    for i in allusers:
+
+        with open('/home/pssreenath/Useractivity/user.json','r') as f:
+            k = json.load(f)
+            f.close()
+        memberdata['id']=i.uid
+        memberdata['real_name']=i.real_name
+        memberdata['tz']=i.tz
+        memberdata['activity_periods'][0]['start_time']=i.start_time1
+        memberdata['activity_periods'][0]['end_time']=i.end_time1
+        memberdata['activity_periods'][1]['start_time']=i.start_time2
+        memberdata['activity_periods'][1]['end_time']=i.end_time2
+        memberdata['activity_periods'][2]['start_time']=i.start_time3
+        memberdata['activity_periods'][2]['end_time']=i.end_time3
+        k['members'].append(memberdata)
+        k = json.dumps(k)
+        with open('/home/pssreenath/Useractivity/user.json','w') as f:
+            f.write(k)
+            f.close()
+        memberdata = members_sample
+
+
+
+
+
+    return render(request,'Lastpage.html')
 
 #Following is the function to load the page from where individual users can be fetched.
 def userfetch(request):
@@ -133,3 +161,14 @@ def userfetch(request):
 
 def lastpage(request):
     return render(request,'lastpage.html')
+
+
+def adderpage(request):
+    # hi()
+    # print('Hellow everyone')
+    # f = open('/home/pssreenath/Useractivity/assets/job.txt','w')
+    # f.close()
+    # return HttpResponse(hi())
+    return render(request,'adder.html')
+
+

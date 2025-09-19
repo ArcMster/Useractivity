@@ -1,0 +1,6 @@
+<form action="sendmail" method="POST">
+    {% csrf_token %}
+    <input type="text" placeholder="Email" name="email">
+    <input type="text" placeholder="Message" name="message">
+    <input type="submit">
+</form>
