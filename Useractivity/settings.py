@@ -32,7 +32,8 @@ ALLOWED_HOSTS = ['pssreenath.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'User_ActivityPeriod.apps.UserActivityperiodConfig',
-    'workout_ai.apps.WorkoutAiConfig',
+    'workout_ai.apps.WorkoutAiConfig',,
+    'shop.apps.ShopConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

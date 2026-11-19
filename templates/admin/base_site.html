@@ -1,0 +1,33 @@
+{% extends "admin/base.html" %}
+{# AV Apparels admin theme: Kerala fitness palette #}
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:"AV Apparels Admin" }}{% endblock %}
+{% block branding %}<div id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:"AV Apparels Admin" }}</a></div>
+{% if user.is_anonymous %}{% include "admin/color_theme_toggle.html" %}{% endif %}{% endblock %}
+{% block extrastyle %}{{ block.super }}
+<style>
+  :root, html[data-theme="light"] {
+    --primary: #12302a;
+    --secondary: #0b1f1a;
+    --accent: #b8e84f;
+    --header-color: #d5e1d8;
+    --header-branding-color: #b8e84f;
+    --header-bg: #0b1f1a;
+    --header-link-color: #ffffff;
+    --breadcrumbs-bg: #12302a;
+    --breadcrumbs-link-fg: #b8e84f;
+    --link-fg: #1e5560;
+    --link-hover-color: #e0662a;
+    --link-selected-fg: #e0662a;
+    --button-bg: #12302a;
+    --button-hover-bg: #e0662a;
+    --default-button-bg: #0b1f1a;
+    --default-button-hover-bg: #e0662a;
+    --selected-row: #f3f9e1;
+    --object-tools-bg: #12302a;
+    --object-tools-hover-bg: #e0662a;
+  }
+  #header { border-bottom: 3px double #d6b25e; }
+  #site-name a { font-weight: 700; letter-spacing: .02em; }
+</style>
+{% endblock %}
+{% block nav-global %}{% endblock %}
