@@ -19,4 +19,5 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('User_ActivityPeriod.urls')),
+    path("ai/", include("workout_ai.urls")),
 ]

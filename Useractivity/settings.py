@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['pssreenath.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'User_ActivityPeriod.apps.UserActivityperiodConfig',
+    'workout_ai.apps.WorkoutAiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -113,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -136,14 +138,6 @@ os.path.join(BASE_DIR,'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'nfclub56@gmail.com'
-EMAIL_HOST_PASSWORD = 'hyahuovedvipejon'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
 
 
 '''
